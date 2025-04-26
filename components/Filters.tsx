@@ -78,7 +78,7 @@ export default function Filters({
                   key={star}
                   type="button"
                   onClick={() => handleChange("rating", star)}
-                  className={`text-2xl ${star <= localFilters.rating ? "text-yellow-400" : "text-gray-400"}`}
+                  className={`text-2xl ${star <= (localFilters.rating ?? 0) ? "text-yellow-400" : "text-gray-400"}`}
                 >
                   ★
                 </button>
