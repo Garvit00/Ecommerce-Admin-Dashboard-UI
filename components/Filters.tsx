@@ -3,20 +3,29 @@
 import { useState } from "react";
 
 const categories = ["electronics","jewelery","men's clothing","women's clothing"];
+type FiltersType = {
+    category?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    rating?: number;
+  };
+  
+interface FiltersProps {
+    initialFilters: FiltersType;
+    onApply: (filters: FiltersType) => void;
+    onClose: () => void;
+  }
 
 export default function Filters({
     initialFilters,
     onApply,
     onClose,
-}:{
-    initialFilters: any;
-    onApply: (filters: any)=>void;
-    onClose: () => void;
-}) {
-    const [localFilters, setLocalFilters] = useState(initialFilters);
-    const handleChange = (field: string, value: any) => {
-        setLocalFilters((prev: any) => ({...prev, [field]: value}));
-    };
+}: FiltersProps)
+{
+    const [localFilters, setLocalFilters] = useState<FiltersType>(initialFilters);
+    const handleChange = (field: keyof FiltersType, value: string | number) => {
+        setLocalFilters((prev) => ({ ...prev, [field]: value }));
+      };
 
     return (
         <div className="p-6 rounded-lg w-96" style={{ background: "var(--background)", color: "var(--foreground)" }}>

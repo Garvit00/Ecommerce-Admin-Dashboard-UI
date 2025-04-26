@@ -27,14 +27,14 @@ export default function HomePage() {
 
   // Calculate analytics
   const totalProducts = products.length;
-  const totalPrice = products.reduce((sum: number, product: any) => sum + product.price, 0);
+  const totalPrice = products.reduce((sum, product) => sum + product.price, 0); // <--- 0 is the initial value
   const averagePrice = (totalPrice / totalProducts).toFixed(2);
 
-  const totalRating = products.reduce((sum: number, product: any) => sum + (product.rating?.rate || 0), 0);
+  const totalRating = products.reduce((sum, product) => sum + (product.rating?.rate || 0), 0);
   const averageRating = (totalRating / totalProducts).toFixed(1);
 
-  const highestPrice = Math.max(...products.map((product: any) => product.price));
-  const lowestPrice = Math.min(...products.map((product: any) => product.price));
+  const highestPrice = Math.max(...products.map((product) => product.price));
+  const lowestPrice = Math.min(...products.map((product) => product.price));
 
   return (
     <div className="p-6">
