@@ -41,7 +41,7 @@ export default function ProductPage({params}: ProductPageProps){
               <img
                 src={product.image}
                 alt={product.title}
-                className="rounded-lg object-cover w-full h-96"
+                className="max-w-full max-h-96 object-contain"
               />
             </div>
             <div className="w-full md:w-1/2 space-y-6">

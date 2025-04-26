@@ -12,13 +12,15 @@ export default function ProductsPage() {
   const router = useRouter();
   const { data: products, isLoading, isError } = useProducts();
 
+  
   const [filters, setFilters] = useState({
     minPrice: 0,
     maxPrice: Infinity,
     category: "",
     rating: 0
   });
-
+  
+  const [searchQuery, setSearchQuery] = useState("");
   const [showFilterModal, setShowFilterModal] = useState(false);
   
   useEffect(() => {
@@ -27,18 +29,22 @@ export default function ProductsPage() {
     }
   }, [user, router]);
 
-  const handleApplyFilters = (newFilters: any) => {
-    setFilters(newFilters);
-    setShowFilterModal(false);
-  };
-
-
+  
+  
   const filteredProducts = products?.filter((product: any) => {
     const priceMatch = product.price >= filters.minPrice && product.price <= filters.maxPrice;
     const categoryMatch = filters.category ? product.category === filters.category : true;
     const ratingMatch = filters.rating ? Math.floor(product.rating.rate) >= filters.rating : true;
-    return priceMatch && categoryMatch && ratingMatch;
+    const searchMatch = searchQuery
+      ? product.title?.toLowerCase().includes(searchQuery.toLowerCase())
+      : true;
+    return priceMatch && categoryMatch && ratingMatch && searchMatch;
   });
+  
+  const handleApplyFilters = (newFilters: any) => {
+    setFilters(newFilters);
+    setShowFilterModal(false);
+  };
 
   if (isLoading) return <p>Loading products...</p>;
   if (isError) return <p>Failed to fetch products.</p>;
@@ -50,12 +56,21 @@ export default function ProductsPage() {
       category: "",
       rating: 0,
     });
+    setSearchQuery("");
   };
 
   return (
     <div className="p-6 space-y-6 relative">
     {/* Filter Button */}
     <div className="flex justify-end">
+      {/* Search Input */}
+      <input
+          type="text"
+          placeholder="Search products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="border border-gray-300 dark:border-gray-600 rounded-md p-2 mx-4 w-full sm:w-64"
+        />
       <button
         onClick={() => setShowFilterModal(true)}
         className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
