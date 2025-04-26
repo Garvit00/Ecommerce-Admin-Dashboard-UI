@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Admin Dashboard for Product Management
 
-## Getting Started
+This is an Admin Dashboard application. The app provides analytics on the products, such as total products, average price, and average rating. It is designed to be used by an admin user to manage the product catalog.
 
-First, run the development server:
+## Features Implemented
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Admin Authentication:**
+  - Admin users are authenticated via context. If the user is not an admin, they will be redirected to the login page.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Product Analytics:**
+  - Displays statistics such as:
+    - Total number of products
+    - Average price of products
+    - Average rating of products
+    - Price range (minimum and maximum prices)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Responsive Design:**
+  - The dashboard is designed to be mobile-responsive, with a user-friendly interface on both desktop and mobile devices.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup Instructions
 
-## Learn More
+### Prerequisites:
+- Node.js (version >= 14.x)
+- npm
 
-To learn more about Next.js, take a look at the following resources:
+### Steps to Run the Application Locally:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd <project-directory>
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies:**  
+    ```bash
+    npm install
 
-## Deploy on Vercel
+3. **Run the development server:**
+    If you're using npm:
+    ```bash
+    npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Open the browser:**  
+   Navigate to `http://localhost:3000` to access the app.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologies Used
+- Frontend Framework: Next.js (for server-side rendering and routing capabilities)
+
+- State Management: React Context (for authentication state management)
+
+- Styling: Tailwind CSS (for utility-first styling)
+
+## Technical Decisions Made
+- Frontend Framework: Next.js was chosen for its SSR and routing features, which allow for faster rendering and easier scaling.
+
+- State Management: React Context was used to handle authentication state and product data.
+
+- Component Library: Tailwind CSS was used for a flexible and responsive design, allowing for fast styling.
+
+- Routing: Next.js’s routing system is used for easy navigation between different views.
+
+## Challenges Faced and Solutions
+
+### Managing Admin Authentication:
+
+- Challenge: Ensuring that only an admin can access the dashboard and product management features without backend authentication.
+
+- Solution: React Context was used to manage the authentication state, and an admin check was added to ensure the user is authorized to view the dashboard.
+
+## Responsive Layout:
+
+- Challenge: Making the product dashboard and forms responsive across devices.
+
+- Solution: Tailwind CSS's grid system and utility classes were used to create a responsive layout that adapts to different screen sizes.
+
+## UI/UX for Adding/Editing Products:
+
+- Challenge: Designing an interface for managing products that is simple and user-friendly.
+
+- Solution: Modal dialogs were used to add and edit products, keeping the interface clean and preventing clutter on the main dashboard.
+
