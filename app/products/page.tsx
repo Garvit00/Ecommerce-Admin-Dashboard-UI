@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/productCard";
 import Filters from "@/components/Filters";
+import { FiltersType } from "@/types/types";
+import { Product } from "@/types/types";
 
 export default function ProductsPage() {
   const {user} = useAuth();
@@ -13,7 +15,7 @@ export default function ProductsPage() {
   const { data: products, isLoading, isError } = useProducts();
 
   
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<FiltersType>({
     minPrice: 0,
     maxPrice: Infinity,
     category: "",
@@ -31,7 +33,7 @@ export default function ProductsPage() {
 
   if(!user) return null;
   
-  const filteredProducts = products?.filter((product: any) => {
+  const filteredProducts = products?.filter((product: Product) => {
     const priceMatch = product.price >= filters.minPrice && product.price <= filters.maxPrice;
     const categoryMatch = filters.category ? product.category === filters.category : true;
     const ratingMatch = filters.rating ? Math.floor(product.rating.rate) >= filters.rating : true;
@@ -41,7 +43,7 @@ export default function ProductsPage() {
     return priceMatch && categoryMatch && ratingMatch && searchMatch;
   });
   
-  const handleApplyFilters = (newFilters: any) => {
+  const handleApplyFilters = (newFilters: FiltersType) => {
     setFilters(newFilters);
     setShowFilterModal(false);
   };
@@ -88,7 +90,7 @@ export default function ProductsPage() {
     {/* Product List */}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {filteredProducts?.length ? (
-        filteredProducts.map((product: any) => (
+        filteredProducts.map((product: Product) => (
           <ProductCard
             key={product.id}
             product={product}

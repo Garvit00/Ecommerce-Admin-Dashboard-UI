@@ -1,14 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { FiltersType } from "@/types/types";
 
 const categories = ["electronics","jewelery","men's clothing","women's clothing"];
-type FiltersType = {
-    category?: string;
-    minPrice?: number;
-    maxPrice?: number;
-    rating?: number;
-  };
   
 interface FiltersProps {
     initialFilters: FiltersType;
@@ -58,7 +53,7 @@ export default function Filters({
             <select
               value={localFilters.category}
               onChange={(e) => handleChange("category", e.target.value)}
-              className="border p-2 rounded w-full"
+              className="border p-2 rounded w-full" style={{ background: "var(--background)", color: "var(--foreground)" }}
             >
               <option value="">All Categories</option>
               {categories.map((cat) => (
