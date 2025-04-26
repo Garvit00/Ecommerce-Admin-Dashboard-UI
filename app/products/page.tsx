@@ -29,7 +29,7 @@ export default function ProductsPage() {
     }
   }, [user, router]);
 
-  
+  if(!user) return null;
   
   const filteredProducts = products?.filter((product: any) => {
     const priceMatch = product.price >= filters.minPrice && product.price <= filters.maxPrice;
