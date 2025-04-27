@@ -43,6 +43,10 @@ This is an Admin Dashboard application. The app provides analytics on the produc
 4. **Open the browser:**  
    Navigate to `http://localhost:3000` to access the app.
 
+5. **Credentials:**
+   - email: admin@gmail.com
+   - password: 12345
+
 ## Technologies Used
 - Frontend Framework: Next.js (for server-side rendering and routing capabilities)
 
