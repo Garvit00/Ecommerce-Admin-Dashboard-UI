@@ -1,9 +1,16 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
+  const handleLinkClick = (path: string) => {
+    router.push(path);
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -17,26 +24,23 @@ const Sidebar = () => {
         </button>
       </div>
 
-      {/* Sidebar itself */}
-      <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-800 p-4 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:block`}
-        style={{ background: "var(--background)", color: "var(--foreground)" }}
-      >
-        <nav className="space-y-4 mt-10 md:mt-0">
+       {/* Sidebar for mobile */}
+       {isOpen && (
+        <aside className="fixed inset-0 w-64 p-4 bg-white z-50" style={{ background: "var(--background)", color: "var(--foreground)" }}>
+          <nav className="space-y-4">
+            <button onClick={() => handleLinkClick("/")} className="block w-full text-left">Dashboard</button>
+            <button onClick={() => handleLinkClick("/products")} className="block w-full text-left">Products</button>
+          </nav>
+        </aside>
+      )}
+
+      {/* Sidebar for Desktop */}
+      <aside className="hidden md:block w-64 p-4" style={{ background: "var(--background)", color: "var(--foreground)" }}>
+        <nav className="space-y-4">
           <Link href="/" className="block">Dashboard</Link>
           <Link href="/products" className="block">Products</Link>
         </nav>
       </aside>
-
-      {/* Background overlay when sidebar is open on mobile */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black opacity-30 md:hidden"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
     </>
   );
 };
